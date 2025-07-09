@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="content">
+            <img src="" alt="wayne_logo">
+            <h1>WAYNE STITCHES</h1>
+            <li class="to_button"><a href={% url 'store:store' %}>Store </a> </li>
+            <li class="to_button"><a href={% url 'about' %}> About Us </a> </li>
+        </div>
+    </div>
+{% endblock %}

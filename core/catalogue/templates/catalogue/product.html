@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+{% load humanize %}
+
+{% block title %}
+    {{product.name}}
+{% endblock %}
+
+{% block content %}
+    <img width="400px" src="{{ product.image.url }}" alt="{{product.name}}">
+    <h1>{{product.name}}</h1>
+    <p> ₦{{product.price|intcomma}} </p>
+    <p> Items Remaining: {{product.avail_units}} </p>
+    <ul class="inline_size">
+        <li>Available Sizes: </li>
+        {% for size in product.size.all %}
+            <li class="size"> {{size.size}} </li>
+        {% endfor %}
+    </ul>
+    <p> {{product.description}} </p>
+    <form method="post" action=" {% url 'store:product_to_cart' id=product.id %} ">
+        {% csrf_token %}
+        <a href= "{% url 'order:cart' %}" >
+            <button class="checkout">Add to cart</button>
+        </a>
+    </form>
+    
+{% endblock %}

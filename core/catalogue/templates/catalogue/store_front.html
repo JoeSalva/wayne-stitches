@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Store
+{% endblock %}
+
+{% block content %}
+    {% for category in categories %}
+        <h3> {{category.name}} </h3>
+        <div class="grid_block">
+            {% for product in category.product.all %}
+                <div class="card">
+                    <a href= "{% url 'store:product_page' slug=product.slug %}">
+                        <img class='prodimg' src={{product.image.url}} alt={{product.name}}>
+                        <h4 class="prod_name">{{product.name}}</h4>
+                    </a>
+                    <p class= "prod_price">₦ {{product.price}}</p>
+                </div>
+            {% endfor %}
+        </div>
+    {% endfor %}
+
+    
+{% endblock %}
