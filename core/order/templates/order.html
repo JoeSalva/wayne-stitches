@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% load humanize %}
+
+{% block content %}
+    {% if orders|length == 0 %}
+        <h3>There is Nothing here yet</h3>
+    {% else %}
+        {% for order in orders %}
+            <div class="order_history">
+                <h3>Order ID: #{{order.id}} </h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Products</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in order.items.all %}
+                    <tr>
+                        <td>
+                            {{item.product.name}}    
+                        </td>
+                        <td>
+                            N {{item.price|intcomma}}
+                        </td>
+                        <td>
+                            {{item.qty}}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+
+
+    <a href=" {% url 'store:store' %} ">Go to Store</a>
+{% endblock content %}  

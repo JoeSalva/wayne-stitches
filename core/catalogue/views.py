@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from .models import Product, Category
-from order.models import OrderItem,Order
+from order.models import OrderItem, Order
 
 # Create your views here.
 

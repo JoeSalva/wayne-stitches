@@ -27,6 +27,7 @@ urlpatterns = [
     path('contact/', views.contact, name='contact'),
     path('store/', include('catalogue.urls')),
     path('order/', include('order.urls')),
+    path('user/', include('user.urls')),
     path('__debug__/', include("debug_toolbar.urls")),
 ]
 

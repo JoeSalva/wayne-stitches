@@ -6,20 +6,29 @@
         {% if cart|length == 0 %}
             <h3>There is Nothing here yet</h3>
         {% else %}
-            <div class="grid_block">
-            {% for item in cart %}
-                    <div class="card">
-                        <img class="prodimg" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
-                        <h4 class="prod_name">{{ item.product.name }}</h4>
-                        <p class="prod_price">₦{{ item.product.price|intcomma }}</p>
-                        <p class="quantity">Quantity: {{ item.qty }}</p>
-                        <form action=" {% url 'order:remove_from_cart' id=item.id %} " method="get">
-                            {% csrf_token %}
-                            <button class="checkout">-</button>
-                        </form>
-                    </div>
-                {% endfor %}
+            <div>
+                <div class="grid_block">
+                    {% for item in cart %}
+                        <div class="card">
+                            <img class="prodimg" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+                            <h4 class="prod_name">{{ item.product.name }}</h4>
+                            <p class="prod_price">₦{{ item.product.price|intcomma }}</p>
+                            <p class="quantity">Quantity: {{ item.qty }}</p>
+                            <form action=" {% url 'order:remove_from_cart' id=item.id %} " method="get">
+                                {% csrf_token %}
+                                <button class="checkout">-</button>
+                            </form>
+                        </div>
+                    {% endfor %}
+                </div>
+                <form action=" {% url 'order:create_order' id=order.id %} " method="post">
+                    {% csrf_token %}
+                    <button class="checkout">Process Order</button>
+                </form>
             </div>
+            
         {% endif %}
-    <a href=" {% url 'store:store' %} ">Go to Store</a>
-{% endblock content %}  
+        
+        <a href=" {% url 'store:store' %} ">Go to Store</a> 
+        <a href=" {% url 'order:order_history'%} ">Order</a> 
+        {% endblock content %}  

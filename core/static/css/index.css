@@ -3,6 +3,11 @@
     border: 0;
 }
 
+a {
+    text-decoration: none;
+    color: rgb(136, 68, 206);
+}
+
 nav li {
     display: inline-block;
 }
@@ -64,4 +69,26 @@ nav li {
     background-color: rgb(136, 68, 206);
     color: whitesmoke;
     text-decoration: solid;
+}
+
+
+/* order history */
+
+.order_history  {
+    margin-top: 3%;
+}
+
+table   {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td  {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+th  {
+    background-color: #f0f0f0;
 }
