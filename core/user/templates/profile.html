@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Profile
+{% endblock %}
+
+{% block content %}
+    <form method="POST">
+        {% csrf_token %}
+        {{p_form.as_p}}
+        {{a_form.as_p}}
+        <button type="submit">Update</button>
+    </form>
+{% endblock %}

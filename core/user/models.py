@@ -13,6 +13,7 @@ class CustomUser(AbstractUser):
     
 class UserProfile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    nickname = models.CharField(max_length=15)
     profile_picture = models.ImageField(upload_to='avatars/', default='avatars/userimage.png')
 
     class Meta:
@@ -27,6 +28,3 @@ class Address(models.Model):
     state = models.CharField(max_length=10)
     local_gov_area = models.CharField(max_length=15)
     street = models.CharField(max_length=50)
-
-
-

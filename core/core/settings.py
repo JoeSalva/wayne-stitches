@@ -150,4 +150,4 @@ INTERNAL_IPS = [
     #...
 ]
 
-LOGIN_URL = 'login'
+LOGIN_URL = 'user:login'

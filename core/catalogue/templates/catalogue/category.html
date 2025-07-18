@@ -2,28 +2,18 @@
 {% load humanize %}
 
 {% block title %}
-    Store
+    {{category.name}}
 {% endblock %}
 
 {% block content %}
-    {% for category in categories %}
-        <a href="{% url 'store:category_view' slug=category.slug %}"> <h3>{{category.name}}</h3> </a>
         <div class="grid_block">
-            {% for product in category.product.all %}
+            {% for product in products %}
                 <div class="card">
                     <a href= "{% url 'store:product_page' slug=product.slug %}">
                         <img class='prodimg' src={{product.image.url}} alt={{product.name}}>
                         <h4 class="prod_name">{{product.name}}</h4>
                     </a>
                     <p class= "prod_price">₦ {{product.price|intcomma}}</p>
-
-                    {% if is_vendor %}
-                        <a class='editor' href="{% url 'store:edit_product' id=product.id %}"><span class="checkout">edit</span></a>
-                    {% endif %}
                 </div>
             {% endfor %}
-        </div>
-    {% endfor %}
-
-    
 {% endblock %}

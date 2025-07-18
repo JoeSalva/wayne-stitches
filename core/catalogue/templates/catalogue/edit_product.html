@@ -1,15 +1,13 @@
 {% extends 'layout.html' %}
 
 {% block title %}
-    Sign Up
+    Profile
 {% endblock %}
 
 {% block content %}
-    <h3>Register as a User</h3>
     <form method="POST">
         {% csrf_token %}
         {{form.as_p}}
-        <button type="submit">Sign Up</button>
+        <button type="submit">Save</button>
     </form>
-    <p>Already have an account? Click </p><a href=" {% url 'user:login' %} ">here</a>
 {% endblock %}

@@ -92,3 +92,84 @@ th, td  {
 th  {
     background-color: #f0f0f0;
 }
+
+General form container
+form {
+  max-width: 500px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Label styling */
+form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Input, select, textarea */
+form input,
+form select,
+form textarea {
+  width: 100%;
+  padding: 0.6rem;
+  margin-bottom: 1.2rem;
+  border: 1px solid  rgb(136, 68, 206);
+  border-radius: 5px;
+  font-size: 0.95rem;
+  transition: border-color 0.3s ease;
+}
+
+form input:focus,
+form select:focus,
+form textarea:focus {
+  border-color:  rgb(136, 68, 206);
+  outline: none;
+}
+
+/* Submit button */
+/* form button,
+form input[type="submit"] {
+  width: 100%;
+  padding: 0.7rem;
+  background-color:  rgb(136, 68, 206);
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+form button:hover,
+form input[type="submit"]:hover {
+  background-color:  rgb(136, 68, 206);
+}
+
+/* Error messages */
+/* .errorlist {
+  color: #e74c3c;
+  margin-bottom: 1rem;
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.errorlist li {
+  margin-left: 0;
+} */
+
+/* Align field errors next to field */
+/* .field-wrapper {
+  margin-bottom: 1.5rem;
+}  */
+
+.editor {
+  margin: 10px;
+}
