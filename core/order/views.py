@@ -13,7 +13,7 @@ def cart(request):
 
 @login_required
 def remove_from_cart(request, id):
-    order = Order.objects.get(status='Pending')
+    order = Order.objects.get(user=request.user, status='Pending')
     item = OrderItem.objects.select_related('product').filter(order=order).get(id=id)
     if request.method == 'GET':
         item.delete()
@@ -23,7 +23,13 @@ def remove_from_cart(request, id):
 @login_required
 def create_order(request, id):
     order = Order.objects.filter(status='Pending').get(id=id)
+    items = OrderItem.objects.select_related('product').filter(order=order)
     if request.method == 'POST':
+        for item in items:
+            stock = item.product.stock # type:ignore
+            stock.qty -= item.qty
+            stock.units_sold += item.qty
+            stock.save()
         order.status = 'Processing'
         order.save()
         return redirect('order:order_history')

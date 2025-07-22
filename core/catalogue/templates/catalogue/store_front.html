@@ -6,6 +6,104 @@
 {% endblock %}
 
 {% block content %}
+    <div class="row">
+        <!-- Mobile Menu Button -->
+        <div class="d-md-none p-2">
+            <button class="btn btn-primary-custom" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu">
+                ☰ Menu
+            </button>
+        </div>
+
+        <!-- Sidebar Offcanvas for Mobile -->
+        <div class="offcanvas offcanvas-start bg-primary-custom text-white" tabindex="-1" id="sidebarMenu">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title">My Store</h5>
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
+            </div>
+            <div class="offcanvas-body">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{% url 'store:store' %}">All Products</a>
+                    </li>
+                    {% for category in categories %}
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="{% url 'store:category_view' slug=category.slug %}">
+                                {{ category.name }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <!-- Sidebar for Desktop -->
+        <div class="col-md-3 col-lg-2 d-none d-md-block bg-primary-custom text-white min-vh-100 p-4">
+            <h4 class="mb-4">My Store</h4>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{% url 'store:store' %}">All Products</a>
+                </li>
+                {% for category in categories %}
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{% url 'store:category_view' slug=category.slug %}">
+                            {{ category.name }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="col-md-9 col-lg-10 bg-white p-4">
+            {% for category in categories %}
+                <div class="mb-5">
+                    <a href="{% url 'store:category_view' slug=category.slug %}">
+                        <h3 class="text-primary-custom mb-3">{{ category.name }}</h3>
+                    </a>
+
+                    <div class="row g-3">
+                        {% for product in category.product.all %}
+                            <div class="col-6 col-md-4 col-lg-2">
+                                <div class="card h-100 border-0">
+                                    <a href="{% url 'store:product_page' slug=product.slug %}">
+                                        <div style="height: 150px; overflow: hidden;">
+                                            <img src="{{ product.image.url }}"
+                                                 alt="{{ product.name }}"
+                                                 class="w-100 h-100 object-fit-cover">
+                                        </div>
+                                    </a>
+                                    <div class="p-2">
+                                        <p class="mb-1 small text-truncate">{{ product.name }}</p>
+                                        <p class="fw-bold small mb-0">₦ {{ product.price|intcomma }}</p>
+
+                                        {% if is_vendor %}
+                                            <a class="btn btn-sm btn-outline-primary mt-1 w-100"
+                                               href="{% url 'store:edit_product' id=product.id %}">Edit</a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+
+
+
+{% comment %}
+
+{% extends 'layout.html' %}
+{% load humanize %}
+
+{% block title %}
+    Store
+{% endblock %}
+
+{% block content %}
     {% for category in categories %}
         <a href="{% url 'store:category_view' slug=category.slug %}"> <h3>{{category.name}}</h3> </a>
         <div class="grid_block">
@@ -23,7 +121,6 @@
                 </div>
             {% endfor %}
         </div>
-    {% endfor %}
-
-    
-{% endblock %}
+    {% endfor %} 
+    {% endblock %}
+    {% endcomment %}

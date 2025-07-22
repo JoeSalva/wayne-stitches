@@ -16,6 +16,8 @@ class Order(models.Model):
     status = models.CharField(max_length=50, choices=DELI_STATUS, default='Pending')
     date_created = models.DateTimeField(auto_now_add=True)
 
+    def get_total_price(self):
+        return sum(item.total_price() for item in self.items.all()) # type:ignore
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='items')

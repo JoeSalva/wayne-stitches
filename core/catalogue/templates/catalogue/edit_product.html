@@ -1,13 +1,13 @@
 {% extends 'layout.html' %}
 
 {% block title %}
-    Profile
+    Update Product
 {% endblock %}
 
 {% block content %}
-    <form method="POST">
+    <form enctype="multipart/form-data" method="POST">
         {% csrf_token %}
         {{form.as_p}}
-        <button type="submit">Save</button>
+        <button class="checkout" type="submit">Save</button>
     </form>
 {% endblock %}

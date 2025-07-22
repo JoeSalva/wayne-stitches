@@ -5,10 +5,16 @@
 {% endblock %}
 
 {% block content %}
-    <form method="POST">
+    <form enctype="multipart/form-data" method="POST">
         {% csrf_token %}
-        {{p_form.as_p}}
-        {{a_form.as_p}}
-        <button type="submit">Update</button>
+        <div class="space">
+            <h2>Profile Info:</h2>
+            {{p_form.as_p}}
+        </div>
+        <div class="space">
+            <h2>Address Info:</h2>
+            {{a_form.as_p}}
+        </div>
+        <button type="submit" class="checkout">Update</button>
     </form>
 {% endblock %}

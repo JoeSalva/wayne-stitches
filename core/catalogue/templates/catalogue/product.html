@@ -19,9 +19,8 @@
     <p> {{product.description}} </p>
     <form method="post" action=" {% url 'store:product_to_cart' id=product.id %} ">
         {% csrf_token %}
-        <a href= "{% url 'order:cart' %}" >
-            <button class="checkout">Add to cart</button>
-        </a>
+        <label for="qty">Quantity:</label>
+        <input type="number" name="qty" min="1" max={{product.avail_units}} value="1" required>
+        <button class="checkout" type="submit">Add to cart</button>
     </form>
-    
 {% endblock %}

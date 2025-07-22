@@ -17,7 +17,12 @@ class Size(models.Model):
 
     def __str__(self):
         return self.size
+    
+class ProductType(models.Model):
+    name = models.CharField(max_length=15)
 
+    def __str__(self) -> str:
+        return self.name
 
 class Product(models.Model):
     name = models.CharField(max_length=100)
@@ -27,6 +32,7 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=8, decimal_places=2)
     size = models.ManyToManyField(Size, blank=True, related_name='sizes')
     image = models.ImageField(default='products/images.png')
+    product_type = models.ForeignKey(ProductType, on_delete=models.CASCADE, related_name='type', null=True)
     is_active = models.BooleanField()
     date_created = models.DateTimeField(auto_now_add=True)
 
