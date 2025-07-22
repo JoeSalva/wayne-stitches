@@ -1,6 +1,64 @@
 {% extends "layout.html" %}
 {% load humanize %}
 
+{% block content %}
+  {% if cart|length == 0 %}
+    <h3 class="text-center my-5">There is Nothing here yet</h3>
+  {% else %}
+    <div class="container py-4">
+      <div class="row">
+        <!-- Cart Items -->
+        <div class="col-md-9">
+          {% for item in cart %}
+            <div class="d-flex align-items-center justify-content-between border-bottom py-3 mb-2">
+              <div class="d-flex align-items-center gap-3">
+                <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="rounded" style="width: 80px; height: 80px; object-fit: cover;">
+                <div>
+                  <h5 class="mb-1">{{ item.product.name }}</h5>
+                  <p class="mb-1 text-muted">₦{{ item.product.price|intcomma }}</p>
+                  <p class="mb-0">Quantity: {{ item.qty }}</p>
+                </div>
+              </div>
+              <form action="{% url 'order:remove_from_cart' id=item.id %}" method="get">
+                {% csrf_token %}
+                <button class="btn btn-sm btn-danger">Remove</button>
+              </form>
+            </div>
+          {% endfor %}
+        </div>
+
+        <!-- Summary -->
+        <div class="col-md-3">
+          <div class="card shadow-sm p-4">
+            <h5 class="mb-3">Order Summary</h5>
+
+            <!-- You can insert your total function here -->
+            <p class="mb-2 fw-semibold">Total: ₦{{ order.get_total_price|intcomma }}</p>  
+
+            <form action="{% url 'order:create_order' id=order.id %}" method="post">
+              {% csrf_token %}
+              <button class="btn btn-primary-custom w-100">Process Order</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+    </div>
+    {% endif %}
+    <div class="mt-4 d-flex justify-content-between">
+      <a href="{% url 'store:store' %}" class="btn btn-outline-secondary">← Back to Store</a>
+      <a href="{% url 'order:order_history' %}" class="btn btn-outline-secondary">View Orders →</a>
+    </div>
+{% endblock %}
+
+
+
+
+
+{% comment %} {% extends "layout.html" %}
+{% load humanize %}
+
 
 {% block content %}
         {% if cart|length == 0 %}
@@ -31,4 +89,4 @@
         
         <a href=" {% url 'store:store' %} ">Go to Store</a> 
         <a href=" {% url 'order:order_history'%} ">Order</a> 
-        {% endblock content %}  
+        {% endblock content %}   {% endcomment %}

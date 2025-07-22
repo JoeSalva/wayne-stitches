@@ -7,9 +7,9 @@ from django.db.models import Prefetch
 
 @login_required
 def cart(request):
-    orders = Order.objects.filter(user=request.user, status='Pending').first()
-    cart = OrderItem.objects.select_related('product').filter(order=orders)
-    return render(request, 'cart.html', {'cart':cart, 'order':orders,})
+    order = Order.objects.filter(user=request.user, status='Pending').first()
+    cart = OrderItem.objects.select_related('product').filter(order=order)
+    return render(request, 'cart.html', {'cart':cart, 'order':order,})
 
 @login_required
 def remove_from_cart(request, id):

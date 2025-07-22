@@ -2,6 +2,59 @@
 {% load humanize %}
 
 {% block content %}
+<div class="container py-4">
+  <h2 class="mb-4">Order History</h2>
+
+  {% if orders|length == 0 %}
+    <div class="alert alert-info text-center">There is nothing here yet.</div>
+  {% else %}
+    {% for order in orders %}
+      <div class="mb-5 border rounded shadow-sm p-4 bg-white">
+        <h5 class="mb-3 fw-bold text-primary-custom">Order ID: #{{ order.id }}</h5>
+        <p class="text-muted small">Placed on: {{ order.date_created|date:"M d, Y - h:i A" }}</p>
+
+        <div class="table-responsive">
+          <table class="table table-bordered align-middle mb-3">
+            <thead class="table-light">
+              <tr>
+                <th>Product</th>
+                <th class="text-end">Price</th>
+                <th class="text-center">Qty</th>
+                <th class="text-end">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for item in order.items.all %}
+              <tr>
+                <td>{{ item.product.name }}</td>
+                <td class="text-end">₦{{ item.price|intcomma }}</td>
+                <td class="text-center">{{ item.qty }}</td>
+                <td class="text-end">₦{{ item.total_price|intcomma }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+
+        <div class="text-end fw-bold fs-5">
+          Total: ₦{{ order.get_total_price|intcomma }}
+        </div>
+      </div>
+    {% endfor %}
+  {% endif %}
+
+  <div class="text-start mt-4">
+    <a href="{% url 'store:store' %}" class="btn btn-outline-secondary">← Back to Store</a>
+  </div>
+</div>
+{% endblock %}
+
+
+
+{% comment %} {% extends "layout.html" %}
+{% load humanize %}
+
+{% block content %}
     {% if orders|length == 0 %}
         <h3>There is Nothing here yet</h3>
     {% else %}
@@ -44,4 +97,4 @@
 
 
     <a href=" {% url 'store:store' %} ">Go to Store</a>
-{% endblock content %}  
+{% endblock content %}   {% endcomment %}

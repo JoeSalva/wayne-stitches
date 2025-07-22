@@ -1,0 +1,72 @@
+<!-- TOPBAR -->
+<nav class="navbar navbar-expand-lg bg-white py-2 shadow-sm">
+  <div class="container-fluid px-4">
+    <!-- Logo -->
+    <a class="navbar-brand fw-bold fs-4" href="#">Wayne Stitches</a>
+
+    <!-- Search bar -->
+    <form class="d-flex mx-auto flex-grow-1 me-4" role="search" style="max-width: 600px;">
+      <div class="input-group">
+        <span class="input-group-text bg-white border-end-0">
+          <i class="bi bi-search text-muted"></i>
+        </span>
+        <input class="form-control border-start-0" type="search" placeholder="Search products, brands and categories" aria-label="Search">
+        <button class="btn btn-warning px-4 text-white fw-bold" type="submit">Search</button>
+      </div>
+    </form>
+
+    <!-- Right icons -->
+    <div class="d-flex align-items-center gap-4">
+      <!-- User -->
+      <div class="dropdown">
+        <a class="dropdown-toggle text-dark text-decoration-none d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="bi bi-person-check me-1"></i> Hi, Chibuikem
+        </a>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="#">Profile</a></li>
+          <li><a class="dropdown-item" href="#">Logout</a></li>
+        </ul>
+      </div>
+
+      <!-- Help -->
+      <div class="dropdown">
+        <a class="dropdown-toggle text-dark text-decoration-none d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="bi bi-question-circle me-1"></i> Help
+        </a>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="#">Contact Us</a></li>
+          <li><a class="dropdown-item" href="#">FAQs</a></li>
+        </ul>
+      </div>
+
+      <!-- Cart -->
+      <a href="#" class="text-dark text-decoration-none position-relative">
+        <i class="bi bi-cart fs-5"></i> Cart
+        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning">
+          2
+        </span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+
+<nav>
+          {% if user.is_authenticated %}
+            <li><a href="{% url 'order:cart' %}">Cart</a></li>
+            <li><a href="{% url 'user:profile' %}">Profile</a></li>
+            <li>
+              <form method="POST" action="{% url 'user:logout' %}">
+                {% csrf_token %}
+                <button type="submit">Logout</button>
+              </form>
+            </li>
+          {% else %}
+            <li><a href="{% url 'user:login' %}">Log In</a></li>
+          {% endif %}
+        </ul>
+      </nav>
+
+      <li><a href="{% url 'home' %}">Home</a> </li>
+          <li><a href="{% url 'about' %}">About</a></li>
+          <li><a href="{% url 'contact' %}">Contact</a></li>

@@ -6,7 +6,35 @@
 {% endblock %}
 
 {% block content %}
-        <div class="grid_block">
+
+<div class="d-flex justify-content-center">
+    <div class="col-md-9 col-lg-10 bg-white p-4 rounded-end shadow-sm">
+        <div class="row g-3">
+            {% for product in products %}
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="card h-100 border-0">
+                        <a href="{% url 'store:product_page' slug=product.slug %}">
+                            <div style="height: 150px; overflow: hidden;">
+                                <img src="{{ product.image.url }}"
+                                    alt="{{ product.name }}"
+                                        class="w-100 h-100 object-fit-cover">
+                            </div>
+                        </a>
+                        <div class="p-2">
+                            <p class="mb-1 small text-truncate">{{ product.name }}</p>
+                            <p class="fw-bold small mb-0">₦ {{ product.price|intcomma }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<a href="{% url 'store:store' %}" class="btn btn-outline-secondary mt-3">← Back to Store</a>
+        
+{% endblock %}
+
+{% comment %} <div class="grid_block">
             {% for product in products %}
                 <div class="card">
                     <a href= "{% url 'store:product_page' slug=product.slug %}">
@@ -15,5 +43,4 @@
                     </a>
                     <p class= "prod_price">₦ {{product.price|intcomma}}</p>
                 </div>
-            {% endfor %}
-{% endblock %}
+            {% endfor %} {% endcomment %}
