@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .models import OrderItem, Order
+from decimal import Decimal
 from django.db.models import Prefetch
 
 # Create your views here.
@@ -29,7 +30,10 @@ def create_order(request, id):
             stock = item.product.stock # type:ignore
             stock.qty -= item.qty
             stock.units_sold += item.qty
+            total_price = sum(item.qty * item.price for item in items )
+            order.end_total_price += Decimal(total_price)
             stock.save()
+            order.save()
         order.status = 'Processing'
         order.save()
         return redirect('order:order_history')

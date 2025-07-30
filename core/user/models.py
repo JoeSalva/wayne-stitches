@@ -28,3 +28,26 @@ class Address(models.Model):
     state = models.CharField(max_length=10, blank=True)
     local_gov_area = models.CharField(max_length=15, blank=True)
     street = models.CharField(max_length=50, blank=True)
+
+class TopMeasurement(models.Model):
+    Back_or_Shoulder = models.IntegerField()
+    Chest_or_Burst = models.IntegerField()
+    Stomach = models.IntegerField()
+    Length = models.IntegerField()
+    Neck = models.IntegerField()
+    Hand = models.IntegerField()
+    Arm = models.IntegerField()
+
+    def __str__(self) -> str:
+        return "Top Measurement"
+
+class BottomMeasurement(models.Model):
+    Waist = models.IntegerField()
+    Lap = models.IntegerField()
+    Hip = models.IntegerField()
+    Knee = models.IntegerField()
+    Length = models.IntegerField()
+    Round_Ankle = models.IntegerField()
+
+    def __str__(self) -> str:
+        return "Bottom Measurement"

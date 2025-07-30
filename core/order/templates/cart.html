@@ -34,7 +34,7 @@
 
             <!-- You can insert your total function here -->
             <p class="mb-2 fw-semibold">Total: ₦{{ order.get_total_price|intcomma }}</p>  
-
+            
             <form action="{% url 'order:create_order' id=order.id %}" method="post">
               {% csrf_token %}
               <button class="btn btn-primary-custom w-100">Process Order</button>

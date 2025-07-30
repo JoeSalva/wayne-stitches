@@ -1,4 +1,5 @@
 from django.db import models
+from decimal import Decimal
 from django.conf import settings
 from catalogue.models import Product  
 
@@ -15,6 +16,7 @@ class Order(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     status = models.CharField(max_length=50, choices=DELI_STATUS, default='Pending')
     date_created = models.DateTimeField(auto_now_add=True)
+    end_total_price = models.DecimalField(max_digits=8, decimal_places=2, default=Decimal('0.00'))
 
     def get_total_price(self):
         return sum(item.total_price() for item in self.items.all()) # type:ignore

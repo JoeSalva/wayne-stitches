@@ -55,8 +55,27 @@
 
         <!-- Main Content -->
         <div class="col-md-9 col-lg-10 bg-white p-4 rounded-end shadow-sm">
+            <div class="topbar d-flex justify-content-between align-items-center sticky-top">
+                <form class="row g-2 align-items-center w-100" action="{% url 'filter' %}">
+                    <div class="col-auto">
+                        <label for="low" class="form-label mb-0">Price:</label>
+                    </div>
+                    <div class="col-auto">
+                        <input type="text" name="low" placeholder="Low" class="form-control form-control-sm"> 
+                    </div>
+                    <div class="col-auto">
+                        <span> to </span>
+                    </div>
+                    <div class="col-auto">
+                        <input type="text" name="high" placeholder="High" class="form-control form-control-sm ">
+                    </div>
+                    <div class="col-auto">
+                        <button class="btn btn-sm btn-primary-custom ms-2 " type="submit">Filter</button>
+                    </div>
+                </form>
+            </div>
             {% for category in categories %}
-                <div class="mb-5">
+                <div class="mb-5 mt-3">
                     <a href="{% url 'store:category_view' slug=category.slug %}">
                         <h3 class="text-primary-custom mb-3">{{ category.name }}</h3>
                     </a>

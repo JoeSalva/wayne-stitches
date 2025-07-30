@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>{% block title %}My Store{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <style>
         :root {
             --primary-color: rgb(170, 86, 212);
@@ -76,10 +77,10 @@
     <!-- Topbar -->
     <div class="topbar d-flex justify-content-between align-items-center sticky-top">
         <!-- Logo -->
-        <div class="logo-space"></div>
+        <a href='{% url "store:store" %}'><div class="logo-space"></div></a>
 
         <!-- Search Bar -->
-        <form class="d-flex flex-grow-1 mx-3" method="GET" action="">
+        <form class="d-flex flex-grow-1 mx-3" method="GET" action=" {% url 'search' %} ">
           <input name="q" class="form-control form-control-sm search-input" type="search" placeholder="Search products and categories" style="max-width: 650px;">
           <button class="btn btn-sm btn-primary-custom ms-2 search-button" type="submit">Search</button>
       </form>

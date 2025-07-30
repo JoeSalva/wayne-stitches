@@ -28,6 +28,8 @@ urlpatterns = [
     path('store/', include('catalogue.urls')),
     path('order/', include('order.urls')),
     path('user/', include('user.urls')),
+    path('adminlog/', include('adminlog.urls')),
+    path('', include('utilities.urls')),
     path('__debug__/', include("debug_toolbar.urls")),
 ]
 

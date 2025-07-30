@@ -1,4 +1,61 @@
 {% extends 'layout.html' %}
+{% load widget_tweaks %}
+
+{% block title %}
+    Profile
+{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <ul class="nav nav-tabs" id="profileTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile"
+                    type="button" role="tab" aria-controls="profile" aria-selected="true">
+                Profile Info
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="address-tab" data-bs-toggle="tab" data-bs-target="#address"
+                    type="button" role="tab" aria-controls="address" aria-selected="false">
+                Address Info
+            </button>
+        </li>
+    </ul>
+
+    <form enctype="multipart/form-data" method="POST" class="border p-4 bg-white shadow-sm">
+        {% csrf_token %}
+        <div class="tab-content mt-3" id="profileTabsContent">
+            <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                {% for field in p_form %}
+                    <div class="mb-3">
+                        <label class="form-label">{{ field.label }}</label>
+                        {% render_field field class="form-control" %}
+                        {% if field.errors %}
+                            <div class="text-danger small">{{ field.errors|join:", " }}</div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="tab-pane fade" id="address" role="tabpanel" aria-labelledby="address-tab">
+                {% for field in a_form %}
+                    <div class="mb-3">
+                        <label class="form-label">{{ field.label }}</label>
+                        {% render_field field class="form-control" %}
+                        {% if field.errors %}
+                            <div class="text-danger small">{{ field.errors|join:", " }}</div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Update</button>
+    </form>
+</div>
+{% endblock %}
+
+
+{% comment %} {% extends 'layout.html' %}
 
 {% block title %}
     Profile
@@ -17,4 +74,4 @@
         </div>
         <button type="submit" class="checkout">Update</button>
     </form>
-{% endblock %}
+{% endblock %} {% endcomment %}

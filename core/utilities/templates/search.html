@@ -1,0 +1,87 @@
+{% extends 'layout.html' %}
+{% load humanize %}
+
+{% block title %}
+    "{{query}}" Search
+{% endblock %}
+
+{% block content %}
+
+<div class="d-flex">
+        <!-- Sidebar -->
+        <div class="col-md-3 col-lg-2 d-none d-md-block bg-primary-custom text-white min-vh-100 p-4 rounded-start shadow-sm " style= "max-height: 100vh;">
+            <h4 class="mb-4">My Store</h4>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{% url 'store:store' %}">All Products</a>
+                </li>
+                {% for category in categories %}
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{% url 'store:category_view' slug=category.slug %}">
+                            {{ category.name }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+         <!-- Main Content -->
+         <div class="col-md-9 col-lg-10 bg-white p-4 rounded-end shadow-sm">
+            <div class="topbar d-flex justify-content-between align-items-center sticky-top">
+                <form class="row g-2 align-items-center w-100" action="{% url 'filter' %}">
+                    <div class="col-auto">
+                        <label for="low" class="form-label mb-0">Price:</label>
+                    </div>
+                    <div class="col-auto">
+                        <input type="text" name="low" placeholder="Low" class="form-control form-control-sm"> 
+                    </div>
+                    <div class="col-auto">
+                        <span> to </span>
+                    </div>
+                    <div class="col-auto">
+                        <input type="text" name="high" placeholder="High" class="form-control form-control-sm ">
+                    </div>
+                    <div class="col-auto">
+                        <button class="btn btn-sm btn-primary-custom ms-2 " type="submit">Filter</button>
+                    </div>
+                </form>
+            </div>
+        <div class="col-md-9 col-lg-10 bg-white p-4 rounded-end shadow-sm">
+                    <div class="row g-3">
+                        {% for product in product %}
+                            <div class="col-6 col-md-4 col-lg-2">
+                                <div class="card h-100 border-0">
+                                    <a href="{% url 'store:product_page' slug=product.slug %}">
+                                        <div style="height: 150px; overflow: hidden;">
+                                            <img src="{{ product.image.url }}"
+                                                 alt="{{ product.name }}"
+                                                 class="w-100 h-100 object-fit-cover">
+                                        </div>
+                                    </a>
+                                    <div class="p-2">
+                                        <p class="mb-1 small text-truncate">{{ product.name }}</p>
+                                        <p class="fw-bold small mb-0">₦ {{ product.price|intcomma }}</p>
+                                    </div>
+                                </div>
+                            </div>
+            {% endfor %}
+            {% for price in price %}
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="card h-100 border-0">
+                        <a href="{% url 'store:product_page' slug=price.slug %}">
+                            <div style="height: 150px; overflow: hidden;">
+                                <img src="{{ price.image.url }}"
+                                alt="{{ price.name }}"
+                                class="w-100 h-100 object-fit-cover">
+                            </div>
+                            </a>
+                            <div class="p-2">
+                                <p class="mb-1 small text-truncate">{{ price.name }}</p>
+                                <p class="fw-bold small mb-0">₦ {{ price.price|intcomma }}</p>
+                            </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

@@ -29,7 +29,7 @@
                 <td>{{ item.product.name }}</td>
                 <td class="text-end">₦{{ item.price|intcomma }}</td>
                 <td class="text-center">{{ item.qty }}</td>
-                <td class="text-end">₦{{ item.total_price|intcomma }}</td>
+                <td class="text-end">₦{{ order.end_total_price|intcomma }}</td>
               </tr>
               {% endfor %}
             </tbody>

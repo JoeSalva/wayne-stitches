@@ -12,7 +12,7 @@ def register(request):
         form = CustomCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
-            group = Group.objects.get_or_create(name='Customer')
+            group, _ = Group.objects.get_or_create(name='Customer')
             user.groups.add(group)
             return redirect('login')
     else:
