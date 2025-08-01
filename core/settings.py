@@ -30,7 +30,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY", "fallback-dev-secret")
 DEBUG = os.environ.get("DEBUG", "False") == "True"
 # DEBUG  = "True"
 
-ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", "").split()
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'sublime-happiness-production.up.railway.app']
 print("ALLOWED_HOSTS:", ALLOWED_HOSTS)
 # ALLOWED_HOSTS = ['*']
 
