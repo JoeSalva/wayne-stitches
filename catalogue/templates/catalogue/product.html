@@ -12,7 +12,7 @@
       <div class="card shadow rounded-4 overflow-hidden">
         <div class="row g-0">
           <div class="col-md-5">
-            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid" style="width: 100%; max-width: 400px; height: auto;">
+            <img src="{{ product.image.url|default:'https://res.cloudinary.com/dokhpnmjw/image/upload/v1754089061/images_drfxy4.png' }}" alt="{{ product.name }}" class="img-fluid" style="width: 100%; max-width: 400px; height: auto;">
           </div>
           <div class="col-md-7">
             <div class="card-body p-4">

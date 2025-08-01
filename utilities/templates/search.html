@@ -53,7 +53,7 @@
                                 <div class="card h-100 border-0">
                                     <a href="{% url 'store:product_page' slug=product.slug %}">
                                         <div style="height: 150px; overflow: hidden;">
-                                            <img src="{{ product.image.url }}"
+                                            <img src="{{ product.image.url|default:'https://res.cloudinary.com/dokhpnmjw/image/upload/v1754089061/images_drfxy4.png' }}"
                                                  alt="{{ product.name }}"
                                                  class="w-100 h-100 object-fit-cover">
                                         </div>
@@ -70,7 +70,7 @@
                     <div class="card h-100 border-0">
                         <a href="{% url 'store:product_page' slug=price.slug %}">
                             <div style="height: 150px; overflow: hidden;">
-                                <img src="{{ price.image.url }}"
+                                <img src="{{ price.image.url|default:'https://res.cloudinary.com/dokhpnmjw/image/upload/v1754089061/images_drfxy4.png' }}"
                                 alt="{{ price.name }}"
                                 class="w-100 h-100 object-fit-cover">
                             </div>
