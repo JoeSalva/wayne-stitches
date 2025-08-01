@@ -30,7 +30,16 @@ SECRET_KEY = os.environ.get("SECRET_KEY", "fallback-dev-secret")
 DEBUG = os.environ.get("DEBUG", "False") == "True"
 # DEBUG  = "True"
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'sublime-happiness-production.up.railway.app']
+CSRF_TRUSTED_ORIGINS = [
+    "https://sublime-happiness-production.up.railway.app",
+]
+
+ALLOWED_HOSTS = [
+    '127.0.0.1', 
+    'localhost', 
+    'sublime-happiness-production.up.railway.app'
+    ]
+
 print("ALLOWED_HOSTS:", ALLOWED_HOSTS)
 # ALLOWED_HOSTS = ['*']
 
