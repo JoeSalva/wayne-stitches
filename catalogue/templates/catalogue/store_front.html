@@ -88,7 +88,7 @@
                                 <div class="card h-100 border-0">
                                     <a href="{% url 'store:product_page' slug=product.slug %}">
                                         <div style="height: 150px; overflow: hidden;">
-                                            <img src="{{ product.image.url|default:'https://res.cloudinary.com/dokhpnmjw/image/upload/v1754089061/images_drfxy4.png' }}"
+                                             <img src="{% if product.image %}{{ product.image.url }}{% else %}'https://res.cloudinary.com/dokhpnmjw/image/upload/v1754089061/images_drfxy4.png'{% endif %}" alt="{{ product.name }}">
                                                  alt="{{ product.name }}"
                                                  class="w-100 h-100 object-fit-cover">
                                         </div>

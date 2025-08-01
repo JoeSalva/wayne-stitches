@@ -53,9 +53,9 @@
                                 <div class="card h-100 border-0">
                                     <a href="{% url 'store:product_page' slug=product.slug %}">
                                         <div style="height: 150px; overflow: hidden;">
-                                            <img src="{{ product.image.url|default:'https://res.cloudinary.com/dokhpnmjw/image/upload/v1754089061/images_drfxy4.png' }}"
-                                                 alt="{{ product.name }}"
-                                                 class="w-100 h-100 object-fit-cover">
+                                             <img src="{% if product.image %}{{ product.image.url }}{% else %}'https://res.cloudinary.com/dokhpnmjw/image/upload/v1754089061/images_drfxy4.png'{% endif %}"
+                                                alt="{{ product.name }}"
+                                                class="w-100 h-100 object-fit-cover">
                                         </div>
                                     </a>
                                     <div class="p-2">
@@ -85,3 +85,5 @@
         </div>
     </div>
 {% endblock %}
+
+ <img src="{% if price.image %}{{ price.image.url }}{% else %}'https://res.cloudinary.com/dokhpnmjw/image/upload/v1754089061/images_drfxy4.png'{% endif %}" alt="{{price.name }}">

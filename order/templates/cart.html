@@ -12,7 +12,7 @@
           {% for item in cart %}
             <div class="d-flex align-items-center justify-content-between border-bottom py-3 mb-2">
               <div class="d-flex align-items-center gap-3">
-                <img src="{{ item.product.image.url|default:'https://res.cloudinary.com/dokhpnmjw/image/upload/v1754089061/images_drfxy4.png' }}" alt="{{ item.product.name }}" class="rounded" style="width: 80px; height: 80px; object-fit: cover;">
+                <img src="{% if item.product.image %}{{ item.product.image.url }}{% else %}'https://res.cloudinary.com/dokhpnmjw/image/upload/v1754089061/images_drfxy4.png'{% endif %}" alt="{{ item.product.name }}" class="rounded" style="width: 80px; height: 80px; object-fit: cover;">
                 <div>
                   <h5 class="mb-1">{{ item.product.name }}</h5>
                   <p class="mb-1 text-muted">₦{{ item.product.price|intcomma }}</p>
