@@ -31,7 +31,7 @@ class Product(models.Model):
     category = models.ManyToManyField(Category, blank=True, related_name='product')
     price = models.DecimalField(max_digits=8, decimal_places=2)
     size = models.ManyToManyField(Size, blank=True, related_name='sizes')
-    image = models.ImageField(default='products/images.png')
+    image = models.ImageField(upload_to='products/', default='products/images.png')
     product_type = models.ForeignKey(ProductType, on_delete=models.CASCADE, related_name='type', null=True)
     is_active = models.BooleanField()
     date_created = models.DateTimeField(auto_now_add=True)

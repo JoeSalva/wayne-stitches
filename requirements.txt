@@ -11,3 +11,5 @@ phonenumbers==9.0.9
 pillow==11.2.1
 sqlparse==0.5.3
 whitenoise==6.9.0
+cloudinary
+django-cloudinary-storage

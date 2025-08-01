@@ -13,6 +13,8 @@ import os.path
 import os
 from pathlib import Path
 from tempfile import template
+import cloudinary
+import cloudinary_storage
 
 from django.conf.global_settings import MEDIA_URL, MEDIA_ROOT
 
@@ -40,6 +42,15 @@ ALLOWED_HOSTS = [
     'sublime-happiness-production.up.railway.app'
     ]
 
+if not DEBUG:
+    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME'),
+    'API_KEY': os.environ.get('CLOUDINARY_API_KEY'),
+    'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET'),
+}
+
 print("ALLOWED_HOSTS:", ALLOWED_HOSTS)
 # ALLOWED_HOSTS = ['*']
 
@@ -53,6 +64,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'cloudinary',
+    'cloudinary_storage',
     'debug_toolbar',
     'widget_tweaks',
     'utilities',
