@@ -14,7 +14,7 @@ def register(request):
             user = form.save()
             group, _ = Group.objects.get_or_create(name='Customer')
             user.groups.add(group)
-            return redirect('login')
+            return redirect('user:login')
     else:
         form = CustomCreationForm()
     return render(request, 'sign_up.html', {'form': form})
