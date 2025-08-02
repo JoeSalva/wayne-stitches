@@ -12,7 +12,11 @@
       <div class="card shadow rounded-4 overflow-hidden">
         <div class="row g-0">
           <div class="col-md-5">
-             <img src="{% if product.image %}{{ product.image.url }}{% else %}'https://res.cloudinary.com/dokhpnmjw/image/upload/v1754089061/images_drfxy4.png'{% endif %}" alt="{{ product.name }}" class="img-fluid" style="width: 100%; max-width: 400px; height: auto;">
+            {% if product.image %}
+              <img src="{{ product.image.url }}" alt="{{ product.name }}" class="w-100 h-100 object-fit-cover">
+            {% else %}
+              <img src="https://res.cloudinary.com/dokhpnmjw/image/upload/v1754089061/images_drfxy4.png" alt="{{ product.name }}" class="w-100 h-100 object-fit-cover">
+            {% endif %}
           </div>
           <div class="col-md-7">
             <div class="card-body p-4">

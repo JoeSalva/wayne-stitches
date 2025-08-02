@@ -53,9 +53,11 @@
                                 <div class="card h-100 border-0">
                                     <a href="{% url 'store:product_page' slug=product.slug %}">
                                         <div style="height: 150px; overflow: hidden;">
-                                             <img src="{% if product.image %}{{ product.image.url }}{% else %}'https://res.cloudinary.com/dokhpnmjw/image/upload/v1754089061/images_drfxy4.png'{% endif %}"
-                                                alt="{{ product.name }}"
-                                                class="w-100 h-100 object-fit-cover">
+                                            {% if product.image %}
+                                                <img src="{{ product.image.url }}" alt="{{ product.name }}" class="w-100 h-100 object-fit-cover">
+                                            {% else %}
+                                                <img src="https://res.cloudinary.com/dokhpnmjw/image/upload/v1754089061/images_drfxy4.png" alt="{{ product.name }}" class="w-100 h-100 object-fit-cover">
+                                            {% endif %}
                                         </div>
                                     </a>
                                     <div class="p-2">
@@ -70,7 +72,7 @@
                     <div class="card h-100 border-0">
                         <a href="{% url 'store:product_page' slug=price.slug %}">
                             <div style="height: 150px; overflow: hidden;">
-                                <img src="{{ price.image.url|default:'https://res.cloudinary.com/dokhpnmjw/image/upload/v1754089061/images_drfxy4.png' }}"
+                                <img src="{% if price.image %}{{ price.image.url }}{% else %}<img src=<img src='https://res.cloudinary.com/dokhpnmjw/image/upload/v1754089061/images_drfxy4.png'>>{% endif %}" alt="{{price.name }}">
                                 alt="{{ price.name }}"
                                 class="w-100 h-100 object-fit-cover">
                             </div>
@@ -86,4 +88,4 @@
     </div>
 {% endblock %}
 
- <img src="{% if price.image %}{{ price.image.url }}{% else %}'https://res.cloudinary.com/dokhpnmjw/image/upload/v1754089061/images_drfxy4.png'{% endif %}" alt="{{price.name }}">
+ 
