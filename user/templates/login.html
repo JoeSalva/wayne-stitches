@@ -16,6 +16,12 @@
         <div class="card-body p-4">
           <form method="POST" class="needs-validation" novalidate>
             {% csrf_token %}
+            
+            {% if form.non_field_errors %}
+              {% for error in form.non_field_errors %}
+                <div class="text-danger mb-3 text-center fw-semibold">{{ error }}</div>
+              {% endfor %}
+            {% endif %}
 
             {% for field in form %}
               <div class="mb-3">

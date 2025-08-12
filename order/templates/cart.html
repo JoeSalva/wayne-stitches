@@ -37,7 +37,12 @@
             <h5 class="mb-3">Order Summary</h5>
 
             <!-- You can insert your total function here -->
-            <p class="mb-2 fw-semibold">Total: ₦{{ order.get_total_price|intcomma }}</p>  
+            <p class="mb-2 fw-semibold">Items({{order.sum_qty}}): ₦{{ order.get_total_price|intcomma }}</p>  
+            <p class="mb-2 fw-semibold">Delivery Fee: ₦{{ fee|intcomma }}</p>  
+            <p class="mb-2 fw-semibold">  </p> 
+            <hr>
+            <p class="mb-2 fw-semibold">Total: ₦{{ order.get_total_price|intcomma }}</p> 
+            <hr>
             
             <form action="{% url 'order:create_order' id=order.id %}" method="post">
               {% csrf_token %}

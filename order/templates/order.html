@@ -3,6 +3,7 @@
 
 {% block content %}
 <div class="container py-4">
+   <div class="col-md-9 col-lg-10 bg-white p-4 rounded-end shadow-sm">
   <h2 class="mb-4">Order History</h2>
 
   {% if orders|length == 0 %}
@@ -29,7 +30,7 @@
                 <td>{{ item.product.name }}</td>
                 <td class="text-end">₦{{ item.price|intcomma }}</td>
                 <td class="text-center">{{ item.qty }}</td>
-                <td class="text-end">₦{{ order.end_total_price|intcomma }}</td>
+                <td class="text-end">₦{{ item.total_price|intcomma }}</td>
               </tr>
               {% endfor %}
             </tbody>
