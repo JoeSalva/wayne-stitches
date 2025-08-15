@@ -1,16 +1,29 @@
 {% extends 'layout.html' %}
+{% load static %}
 
 {% block title %}
     Home
 {% endblock %}
 
 {% block content %}
-    <div class="container">
+    <div class="container-fluid vh-100 p-0" style="height: calc(100vh - 170px); overflow: hidden; background: url('/static/img/fashion-bg.jpg') no-repeat center center; background-size: cover;">
+        <div class="d-flex flex-column justify-content-center align-items-center text-center h-100 bg-dark bg-opacity-50">
+            <img src="{% static 'img/logo.png' %}" alt="WAYNE STITCHES Logo" class="mb-4" style="width: 150px; height: auto;">
+            <h1 class="text-white fw-bold mb-4" style="font-size: 3rem;">WAYNE STITCHES</h1>
+            <p class="text-white fs-4 mb-4 mt-1 fst-italic">“Giving you the best stitches overall”</p>
+            <div class="d-flex gap-3">
+                <a href="{% url 'store:store' %}" class="btn btn-primary btn-lg shadow">Shop Now</a>
+                <a href="{% url 'about' %}" class="btn btn-outline-light btn-lg shadow">About Us</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+    {% comment %} <div class="container">
         <div class="content">
             <img src="" alt="wayne_logo">
             <h1>WAYNE STITCHES</h1>
             <li class="to_button"><a href="{% url 'store:store' %}">Store </a> </li>
             <li class="to_button"><a href="{% url 'about' %}"> About Us </a> </li>
         </div>
-    </div>
-{% endblock %}
+    </div> {% endcomment %}

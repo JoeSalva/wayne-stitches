@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    False payment
+{% endblock %}
+
+{% block content %}
+    <form method="POST">
+        {% csrf_token %}
+        <input type="email" name="email" placeholder="Your Email" required />
+        <input type="number" name="amount" placeholder="Amount (NGN)" step="0.01" required />
+        <button type="submit">Pay with Flutterwave</button>
+    </form>
+{% endblock %}
