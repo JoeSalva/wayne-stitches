@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 import os.path
 import os
+from dotenv import load_dotenv
 from pathlib import Path
 from tempfile import template
 import cloudinary
@@ -30,17 +31,19 @@ SECRET_KEY = os.environ.get("SECRET_KEY", "fallback-dev-secret")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = os.environ.get("DEBUG", "False") == "True"
-DEBUG  = "True"
+DEBUG  = "False"
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://sublime-happiness-production.up.railway.app",
+    "https://wayne-stitches-production.up.railway.app",
 ]
 
 ALLOWED_HOSTS = [
     '127.0.0.1', 
     'localhost', 
-    'sublime-happiness-production.up.railway.app'
+    'wayne-stitches-production.up.railway.app'
     ]
+
+load_dotenv()
 
 if not DEBUG:
     DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
@@ -182,5 +185,5 @@ INTERNAL_IPS = [
 ]
 
 LOGIN_URL = 'user:login'
-FLUTTERWAVE_PUBLIC_KEY = "FLWPUBK_TEST-2af5b04838dcf7123ebbcd948fe753d5-X"
-FLUTTERWAVE_SECRET_KEY = "FLWSECK_TEST-bc1a043c795460d96b7baa02943b09e8-X"
+FLUTTERWAVE_PUBLIC_KEY = os.getenv("FLUTTERWAVE_PUBLIC_KEY")
+FLUTTERWAVE_SECRET_KEY = os.getenv("FLUTTERWAVE_SECRET_KEY")

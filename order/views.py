@@ -67,11 +67,3 @@ def track_order(request, id):
     }
     return render(request, 'track_order.html', context)
 
-
-# for item in items:
-#             stock = item.product.stock # type:ignore
-#             stock.qty -= item.qty
-#             stock.units_sold += item.qty
-#             stock.save()
-#         order.status = Order.DELI_STATUS.PROCESSING #type: ignore
-#         order.delivery_state = saved_state

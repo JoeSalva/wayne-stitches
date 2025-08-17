@@ -4,12 +4,13 @@ from django.conf import settings
 from django.shortcuts import redirect, render, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 from order.models import Order, OrderItem
+from django.contrib.auth.decorators import login_required
 from order.choices import DELIVERY_PRICES
 import uuid
 
 
 # Create your views here.
-
+@login_required
 def initiate_payment_page(request, id):
     order = get_object_or_404(Order, id=id, status=Order.DELI_STATUS.PENDING)
     items = OrderItem.objects.filter(order=order).select_related('product')
@@ -20,7 +21,7 @@ def initiate_payment_page(request, id):
     return render(request, "payment/initiate.html", {'order': order, 'delivery_fee': delivery_fee, 'total_price': total_price, 'items':items})
 
 
-
+@login_required
 def initialize_payment(request, id):
     order = get_object_or_404(Order, id=id)
     total_price = order.end_total_price
@@ -63,6 +64,7 @@ def initialize_payment(request, id):
             return render(request, "error.html", {"message": res_data.get("message", "Payment initiation failed.")})
     return redirect("order:cart")
 
+@login_required
 def verify_payment(request, id):
     order = get_object_or_404(Order, id=id, status=Order.DELI_STATUS.PENDING)
     items = OrderItem.objects.select_related('product').filter(order=order)

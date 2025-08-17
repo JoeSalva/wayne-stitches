@@ -1,6 +1,10 @@
 {% extends "layout.html" %}
 {% load humanize %}
 
+{% block title %}
+  Cart
+{% endblock %}
+
 {% block content %}
   {% if cart|length == 0 %}
     <h3 class="text-center my-5">There is Nothing here yet</h3>
@@ -8,7 +12,7 @@
     <div class="container py-4">
       <div class="row">
         <!-- Cart Items -->
-        <div class="col-md-9">
+        <div class="col-md-7">
           {% for item in cart %}
             <div class="d-flex align-items-center justify-content-between border-bottom py-3 mb-2">
               <div class="d-flex align-items-center gap-3">
@@ -32,29 +36,31 @@
         </div>
 
         <!-- Summary -->
-        <div class="col-md-3">
+        <div class="col-md-4">
           <div class="card shadow-sm p-4">
             <h5 class="mb-3">Order Summary</h5>
 
             <!-- You can insert your total function here -->
-            <table class="table table-borderless">
-                <tbody>
-                    <tr>
-                        <td class="fw-semibold text-start" style="width: 50%;">Items ({{ order.sum_qty }}):</td>
-                        <td class="fw-semibold text-start">₦{{ order.get_total_price|intcomma }}</td>
-                    </tr>
-                    <tr>
-                        <td class="fw-semibold text-start">Delivery Fee:</td>
-                        <td class="fw-semibold text-start">₦{{ fee|intcomma }}</td>
-                    </tr>
-                    <tr><td colspan="2"><hr class="my-1"></td></tr>
-                    <tr>
-                        <td class="fw-semibold text-start">Total:</td>
-                        <td class="fw-semibold text-start">₦{{ total|intcomma }}</td>
-                    </tr>
-                    <tr><td colspan="2"><hr class="my-1"></td></tr>
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table class="table table-borderless">
+                    <tbody>
+                        <tr>
+                            <td class="fw-semibold text-start" style="width: 50%;">Items ({{ order.sum_qty }}):</td>
+                            <td class="fw-semibold text-start">₦{{ order.get_total_price|intcomma }}</td>
+                        </tr>
+                        <tr>
+                            <td class="fw-semibold text-start">Delivery Fee:</td>
+                            <td class="fw-semibold text-start">₦{{ fee|intcomma }}</td>
+                        </tr>
+                        <tr><td colspan="2"><hr class="my-1"></td></tr>
+                        <tr>
+                            <td class="fw-semibold text-start">Total:</td>
+                            <td class="fw-semibold text-start">₦{{ total|intcomma }}</td>
+                        </tr>
+                        <tr><td colspan="2"><hr class="my-1"></td></tr>
+                    </tbody>
+                </table>
+          </div>
             
             <form action="{% url 'order:create_order' order.id %}" method="post">
               {% csrf_token %}
