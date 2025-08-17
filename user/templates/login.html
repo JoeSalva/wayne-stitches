@@ -28,7 +28,16 @@
                 <label for="{{ field.id_for_label }}" class="form-label fw-semibold">
                   {{ field.label }}
                 </label>
-                {{ field|add_class:"form-control" }}
+                {% if field.field.widget.input_type == "password" %}
+                  <div class="input-group">
+                    {{ field|add_class:"form-control" }}
+                    <button class="btn btn-outline-secondary" type="button" data-toggle="password">
+                      <i class="bi bi-eye-slash"></i>
+                    </button>
+                  </div>
+                {% else %}
+                  {{ field|add_class:"form-control" }}
+                {% endif %}
                 {% if field.errors and field.help_text %}
                     <div class="form-text text-warning small">{{ field.help_text }}</div>
                 {% endif %}
@@ -53,4 +62,22 @@
     </div>
   </div>
 </div>
+
+<script>
+document.addEventListener("click", function(e) {
+  if (e.target.closest("[data-toggle='password']")) {
+    const btn = e.target.closest("[data-toggle='password']");
+    const input = btn.previousElementSibling;
+    const icon = btn.querySelector("i");
+
+    if (input.type === "password") {
+      input.type = "text";
+      icon.classList.replace("bi-eye-slash", "bi-eye");
+    } else {
+      input.type = "password";
+      icon.classList.replace("bi-eye", "bi-eye-slash");
+    }
+  }
+});
+</script>
 {% endblock %} 
