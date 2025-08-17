@@ -11,7 +11,7 @@
   {% else %}
     {% for order in orders %}
       <div class="mb-5 border rounded shadow-sm p-4 bg-white">
-        <h5 class="mb-3 fw-bold text-primary-custom">Order ID: #{{ order.id }}</h5>
+        <a href="{% url 'order:track_order' order.id %}"><h5 class="mb-3 fw-bold text-primary-custom">Order ID: #{{ order.id }}</h5></a>
         <p class="text-muted small">Placed on: {{ order.date_created|date:"M d, Y - h:i A" }}</p>
 
         <div class="table-responsive">

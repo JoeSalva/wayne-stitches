@@ -10,6 +10,7 @@ class Order(models.Model):
     class DELI_STATUS (models.TextChoices):
         PENDING = 'PENDING', 'Pending'
         PROCESSING = 'PROCESSING', 'Processing'
+        SHIPPED = 'SHIPPED', 'Shipped'
         DELIVERED = 'DELIVERED', 'Delivered'
         CANCELLED = 'CANCELLED', 'Cancelled'
 

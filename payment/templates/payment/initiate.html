@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+{% load humanize %}
+
+{% block content %}
+<div class="container py-5">
+    <!-- Invoice Card -->
+    <div class="card p-4 shadow-sm" style="max-width: 800px; margin: auto;">
+        <!-- Header -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h3 class="fw-bold">Invoice</h3>
+            <div>
+                <p class="mb-1"><strong>Order ID:</strong> #{{ order.id }}</p>
+            </div>
+        </div>
+
+        <hr>
+
+        <!-- Items Table -->
+        <table class="table table-borderless">
+            <thead>
+                <tr class="border-bottom">
+                    <th class="text-start">Item</th>
+                    <th class="text-center">Qty</th>
+                    <th class="text-end">Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                <tr>
+                    <td class="text-start">{{ item.product.name }}</td>
+                    <td class="text-center">{{ item.qty }}</td>
+                    <td class="text-end">₦{{ item.price|intcomma }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <hr>
+
+        <!-- Delivery and Total -->
+        <table class="table table-borderless mb-0">
+            <tbody>
+                <tr>
+                    <td class="text-end fw-semibold" style="width: 80%;">Delivery Fee:</td>
+                    <td class="text-end fw-semibold">₦{{ delivery_fee|intcomma }}</td>
+                </tr>
+                <tr>
+                    <td class="text-end fw-bold">Total:</td>
+                    <td class="text-end fw-bold">₦{{ total_price|intcomma }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <hr>
+
+        <!-- Payment Button -->
+        <div class="text-center mt-4">
+            <form action="{% url 'payment:initialize_payment' order.id %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary btn-lg px-5">Pay Now</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

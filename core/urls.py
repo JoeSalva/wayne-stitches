@@ -30,6 +30,7 @@ urlpatterns = [
     path('user/', include('user.urls')),
     path('adminlog/', include('adminlog.urls')),
     path('', include('utilities.urls')),
+    path('payment/', include('payment.urls')),
     path('__debug__/', include("debug_toolbar.urls")),
 ]
 

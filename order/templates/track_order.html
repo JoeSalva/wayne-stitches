@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container py-5" style="max-width: 800px;">
+
+  <h3 class="mb-4">Order Tracking</h3>
+
+  <!-- Order Info -->
+  <div class="card p-3 mb-4 shadow-sm">
+    <p class="mb-1"><strong>Order ID:</strong> #{{ order.id }}</p>
+    <p class="mb-1"><strong>Placed on:</strong> {{ order.created_at|date:"F j, Y" }}</p>
+    <p class="mb-0"><strong>Current Status:</strong> 
+      <span class="badge bg-info text-dark">{{ order.get_status_display }}</span>
+    </p>
+  </div>
+
+  <!-- Tracking Progress -->
+  <div class="card p-4 shadow-sm">
+    <h5 class="mb-3">Order Progress</h5>
+    <div class="progress" style="height: 30px;">
+      {% if order.status == "PENDING" %}
+        <div class="progress-bar bg-secondary" style="width: 25%;"><span class="fw-bold">Pending</span></div>
+      {% elif order.status == "PROCESSING" %}
+        <div class="progress-bar bg-warning" style="width: 50%;"><span class="fw-bold">Processing</span></div>
+      {% elif order.status == "SHIPPED" %}
+        <div class="progress-bar bg-primary" style="width: 75%;"><span class="fw-bold">Shipped</span></div>
+      {% elif order.status == "DELIVERED" %}
+        <div class="progress-bar bg-success" style="width: 100%;"><span class="fw-bold">Delivered</span></div>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- Timeline Steps -->
+  <div class="mt-4">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item {% if order.status in "PENDING PROCESSING SHIPPED DELIVERED" %}text-success{% endif %}">
+        ✅ Order Placed
+      </li>
+      <li class="list-group-item {% if order.status in "PROCESSING SHIPPED DELIVERED" %}text-success{% endif %}">
+        ⚙️ Processing
+      </li>
+      <li class="list-group-item {% if order.status in "SHIPPED DELIVERED" %}text-success{% endif %}">
+        🚚 Shipped
+      </li>
+      <li class="list-group-item {% if order.status == "DELIVERED" %}text-success{% endif %}">
+        📦 Delivered
+      </li>
+    </ul>
+  </div>
+
+</div>
+{% endblock %}

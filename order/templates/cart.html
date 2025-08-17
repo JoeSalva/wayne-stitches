@@ -37,14 +37,26 @@
             <h5 class="mb-3">Order Summary</h5>
 
             <!-- You can insert your total function here -->
-            <p class="mb-2 fw-semibold">Items({{order.sum_qty}}): ₦{{ order.get_total_price|intcomma }}</p>  
-            <p class="mb-2 fw-semibold">Delivery Fee: ₦{{ fee|intcomma }}</p>  
-            <p class="mb-2 fw-semibold">  </p> 
-            <hr>
-            <p class="mb-2 fw-semibold">Total: ₦{{ total_price_with_delivery|intcomma }}</p> 
-            <hr>
+            <table class="table table-borderless">
+                <tbody>
+                    <tr>
+                        <td class="fw-semibold text-start" style="width: 50%;">Items ({{ order.sum_qty }}):</td>
+                        <td class="fw-semibold text-start">₦{{ order.get_total_price|intcomma }}</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-semibold text-start">Delivery Fee:</td>
+                        <td class="fw-semibold text-start">₦{{ fee|intcomma }}</td>
+                    </tr>
+                    <tr><td colspan="2"><hr class="my-1"></td></tr>
+                    <tr>
+                        <td class="fw-semibold text-start">Total:</td>
+                        <td class="fw-semibold text-start">₦{{ total|intcomma }}</td>
+                    </tr>
+                    <tr><td colspan="2"><hr class="my-1"></td></tr>
+                </tbody>
+            </table>
             
-            <form action="{% url 'order:create_order' id=order.id %}" method="post">
+            <form action="{% url 'order:create_order' order.id %}" method="post">
               {% csrf_token %}
               <button class="btn btn-primary-custom w-100">Process Order</button>
             </form>
@@ -58,6 +70,7 @@
     <div class="mt-4 d-flex justify-content-between">
       <a href="{% url 'store:store' %}" class="btn btn-outline-secondary">← Back to Store</a>
       <a href="{% url 'order:order_history' %}" class="btn btn-outline-secondary">View Orders →</a>
+      {% comment %} <a href="{% url 'payment:initialize_payment' %}" class="btn btn-outline-secondary">Test Payment →</a> {% endcomment %}
     </div>
 {% endblock %}
 
