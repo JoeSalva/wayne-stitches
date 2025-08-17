@@ -44,8 +44,8 @@ def edit_product(request, id):
 def product_to_cart(request, id):
     user = request.user
     product = Product.objects.get(id=id)
-    qty = int(request.POST.get('qty'))
     if request.method == 'POST':
+        qty = int(request.POST.get('qty', 1))
         order, created = Order.objects.get_or_create(user=user, status=Order.DELI_STATUS.PENDING)
         order_item, item_created = OrderItem.objects.get_or_create(
             order = order,
