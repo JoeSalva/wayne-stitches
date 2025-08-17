@@ -90,7 +90,7 @@
         <div class="d-flex align-items-center ms-auto">
           {% if user.is_authenticated %}
               <a href="{% url 'user:profile' %}" class="text-dark me-3 text-decoration-none d-flex align-items-center">
-                  <i class="bi bi-person nav-icon me-1"></i> Hi, {{ user.userprofile.nickname|default:"User" }}
+                  <i class="bi bi-person nav-icon me-1"></i> Hi, {{ user.username|default:"User" }}
               </a>
               <a href="{% url 'order:cart' %}" class="text-dark me-3 text-decoration-none d-flex align-items-center">
                   <i class="bi bi-cart nav-icon me-1"></i> Cart

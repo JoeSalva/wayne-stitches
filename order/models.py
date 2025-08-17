@@ -18,7 +18,7 @@ class Order(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     status = models.CharField(max_length=50, choices=DELI_STATUS.choices, default=DELI_STATUS.PENDING)
     date_created = models.DateTimeField(auto_now_add=True)
-    end_total_price = models.DecimalField(max_digits=8, decimal_places=2, default=Decimal('0.00'))
+    end_total_price = models.DecimalField(max_digits=12, decimal_places=2, default=Decimal('0.00'))
     delivery_state = models.CharField(max_length=10, choices=NigerianStates.choices, blank=True)
     delivery_fee = models.IntegerField(blank=True, null=True)
 
@@ -35,7 +35,7 @@ class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='items')
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     qty = models.IntegerField(default=1)
-    price = models.DecimalField(max_digits=8, decimal_places=2)
+    price = models.DecimalField(max_digits=12, decimal_places=2)
 
     def total_price(self):
         return self.qty * self.price

@@ -32,7 +32,7 @@ def initialize_payment(request, id):
         tx_ref = str(uuid.uuid4())  # unique transaction reference
 
         headers = {
-            "Authorization": f"Bearer {settings.FLUTTERWAVE_SECRET_KEY}",
+            "Authorization": f"Bearer {settings.FLUTTERWAVE_PUBLIC_KEY}",
             "Content-Type": "application/json",
         }
 

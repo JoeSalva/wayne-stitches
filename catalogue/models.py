@@ -30,7 +30,7 @@ class Product(models.Model):
     slug = models.SlugField()
     description = models.TextField()
     category = models.ManyToManyField(Category, blank=True, related_name='product')
-    price = models.DecimalField(max_digits=8, decimal_places=2)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
     size = models.ManyToManyField(Size, blank=True, related_name='sizes')    
     image = CloudinaryField('image', blank=True, null=True)
     # image = models.ImageField(upload_to= 'product/',blank=True, null=True)

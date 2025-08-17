@@ -3,12 +3,13 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
 from phonenumber_field.formfields import PhoneNumberField
 from .models import UserProfile, Address, TopMeasurement, BottomMeasurement
+from order.choices import NigerianStates
 
 User = get_user_model()
 
 class CustomCreationForm(UserCreationForm):
     country = forms.CharField(max_length=100)
-    state = forms.CharField(max_length=100)
+    state = forms.ChoiceField(choices=NigerianStates.choices)
     LGA = forms.CharField(max_length=100)
     street = forms.CharField(max_length=255)
     phone = PhoneNumberField(region='NG', required=True)
