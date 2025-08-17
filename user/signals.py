@@ -7,6 +7,5 @@ from .models import UserProfile, Address, TopMeasurement, BottomMeasurement
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         UserProfile.objects.create(user=instance)
-        Address.objects.create(user=instance)
         TopMeasurement.objects.create(user = instance)
         BottomMeasurement.objects.create(user = instance)

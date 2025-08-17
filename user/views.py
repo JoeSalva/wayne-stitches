@@ -3,6 +3,7 @@ from .forms import CustomCreationForm, UpdateProfile, UpdateAddress, UpdateTopMe
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from django.contrib.auth.models import Group
+from .models import Address
 
 
 # Create your views here.
@@ -14,6 +15,13 @@ def register(request):
             user = form.save()
             group, _ = Group.objects.get_or_create(name='Customer')
             user.groups.add(group)
+            Address.objects.create(
+                user=user,
+                country=form.cleaned_data.get("country"),
+                state=form.cleaned_data.get("state"),
+                LGA=form.cleaned_data.get("LGA"),
+                street=form.cleaned_data.get("street"),
+            )
             return redirect('user:login')
     else:
         form = CustomCreationForm()

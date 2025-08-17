@@ -25,10 +25,10 @@ class UserProfile(models.Model):
     
 class Address(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    country = models.CharField(max_length=15, blank=True)
-    state = models.CharField(max_length=10, choices=NigerianStates.choices, blank=True)
-    LGA = models.CharField(max_length=15, blank=True)
-    street = models.CharField(max_length=50, blank=True)
+    country = models.CharField(max_length=100, blank=True)
+    state = models.CharField(max_length=100, choices=NigerianStates.choices, blank=True)
+    LGA = models.CharField(max_length=100, blank=True)
+    street = models.CharField(max_length=225, blank=True)
 
     class Meta:
         verbose_name_plural = 'Addresses'

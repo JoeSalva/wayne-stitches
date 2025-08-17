@@ -7,11 +7,16 @@ from .models import UserProfile, Address, TopMeasurement, BottomMeasurement
 User = get_user_model()
 
 class CustomCreationForm(UserCreationForm):
-    class Meta:
-        phone = PhoneNumberField(region='NG', required=True)
-
+    country = forms.CharField(max_length=100)
+    state = forms.CharField(max_length=100)
+    LGA = forms.CharField(max_length=100)
+    street = forms.CharField(max_length=255)
+    phone = PhoneNumberField(region='NG', required=True)
+    
+    class Meta(UserCreationForm.Meta):
         model = User
-        fields = ('username', 'email', 'phone', 'password1', 'password2')
+        fields = ('username', 'email', 'phone', 'password1', 'password2',
+                  'country', 'state', 'LGA', 'street')
 
 class UpdateProfile(forms.ModelForm):
     class Meta:
